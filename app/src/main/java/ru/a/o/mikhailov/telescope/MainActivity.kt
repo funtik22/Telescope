@@ -13,25 +13,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.place_holder, SettingsFragment.newInstance())
+            .commit()
+
         binding.apply {
-            open.setOnClickListener {
-                drawer.openDrawer(GravityCompat.START)
-            }
             navView.setNavigationItemSelectedListener {
                 when(it.itemId){
                     R.id.settings -> {
-                        Toast.makeText(this@MainActivity, "item1", Toast.LENGTH_SHORT).show()
-                        //
-                        //
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.place_holder, SettingsFragment.newInstance())
+                            .commit()
+                        drawer.closeDrawer(GravityCompat.START)
                     }
                     R.id.control -> {
-                        //
-                        //
-                        //
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.place_holder, ControlFragment.newInstance())
+                            .commit()
+                        drawer.closeDrawer(GravityCompat.START)
                     }
                 }
                 true
-
             }
         }
     }
