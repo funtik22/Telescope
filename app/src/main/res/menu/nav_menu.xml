@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Category 1">
+        <menu>
+            <item android:title="Настройки"
+                  android:id="@+id/settings"
+                android:icon="@drawable/ic_baseline_settings_24">
+            </item>
+
+            <item android:title="Управление"
+                android:id="@+id/control"
+                android:icon="@drawable/ic_baseline_control_camera_24">
+            </item>
+
+        </menu>
+    </item>
+
+
+</menu>
