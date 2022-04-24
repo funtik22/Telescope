@@ -1,20 +1,15 @@
 package ru.a.o.mikhailov.telescope
 
+
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.a.o.mikhailov.telescope.databinding.FragmentSettingsBinding
@@ -29,7 +24,7 @@ class SettingsFragment : Fragment(), RcViewDeviceAdapter.Listener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSettingsBinding.inflate(inflater)
         return binding.root
     }
@@ -42,7 +37,6 @@ class SettingsFragment : Fragment(), RcViewDeviceAdapter.Listener {
     companion object {
         @JvmStatic
         fun newInstance() = SettingsFragment()
-        const val DEVICE_KEY = "device key"
     }
 
     private fun init(){
@@ -53,6 +47,7 @@ class SettingsFragment : Fragment(), RcViewDeviceAdapter.Listener {
         binding.rcViewDevice.adapter = adapter
         getPairedDevices()
     }
+
 
     @SuppressLint("MissingPermission")
     private fun getPairedDevices(){

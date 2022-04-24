@@ -4,7 +4,7 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 
 class BluetoothConnection(private val adapter: BluetoothAdapter, context: Context) {
-    lateinit  var connectionThread: BluetoothConnectThread
+    private lateinit  var connectionThread: BluetoothConnectThread
     private val cnt = context
     fun connect(mac: String) {
         if (adapter.isEnabled && mac.isNotEmpty()) {
@@ -15,5 +15,9 @@ class BluetoothConnection(private val adapter: BluetoothAdapter, context: Contex
                 connectionThread.start()
             }
         }
+    }
+
+    fun sendMessage(message: String){
+        connectionThread.receiveThread.sendMessage(message.toByteArray())
     }
 }

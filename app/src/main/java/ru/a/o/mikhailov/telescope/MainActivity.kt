@@ -7,7 +7,7 @@ import androidx.core.view.GravityCompat
 import ru.a.o.mikhailov.telescope.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.Theme_Telescope)

@@ -10,15 +10,14 @@ import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.util.*
 
+
 @SuppressLint("MissingPermission")
 class BluetoothConnectThread(private val device: BluetoothDevice, context: Context): Thread() {
 
     private val uuid = "00001101-0000-1000-8000-00805F9B34FB"
     private var mSocket: BluetoothSocket? = null
     private val cnt = context
-
-
-
+    lateinit var receiveThread :ReceiveThread
 
     init{
         try {
@@ -40,6 +39,8 @@ class BluetoothConnectThread(private val device: BluetoothDevice, context: Conte
             ContextCompat.getMainExecutor(cnt).execute {
                 Toast.makeText(cnt, "connected", Toast.LENGTH_LONG).show()
             }
+            receiveThread = ReceiveThread(mSocket!!)
+            receiveThread.start()
         }catch (i: IOException){
             Log.d("mylog", "Can not connected to device")
             ContextCompat.getMainExecutor(cnt).execute {
@@ -49,7 +50,7 @@ class BluetoothConnectThread(private val device: BluetoothDevice, context: Conte
         }
     }
 
-    fun closeConnection(){
+    private fun closeConnection(){
         try {
             mSocket?.close()
         }catch (i: IOException){
