@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F8FF"
+    android:backgroundTint="#F1F8FF"
     tools:context=".ControlFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,14 +16,14 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="Подключение"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,11 +31,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button">
 
-            <Button
+            <ImageButton
                 android:id="@+id/buttonSendOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:backgroundTint="#F1F8FF"
+                android:src="@drawable/polygon_2"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,28 +46,37 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <Button
+                <ImageButton
                     android:id="@+id/buttonSendFour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4" />
+                    android:layout_weight="0"
+                    android:backgroundTint="#F1F8FF"
+                    android:src="@drawable/left"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <Space
                     android:layout_width="100dp"
                     android:layout_height="match_parent" />
 
-                <Button
-                    android:id="@+id/buttonSentTwo"
+                <ImageButton
+                    android:id="@+id/buttonSendTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2" />
+                    android:layout_weight="0"
+                    android:backgroundTint="#F1F8FF"
+                    android:src="@drawable/right"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/buttonSendThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3" />
+                android:backgroundTint="#F1F8FF"
+                android:src="@drawable/down"
+                tools:ignore="SpeakableTextPresentCheck" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
