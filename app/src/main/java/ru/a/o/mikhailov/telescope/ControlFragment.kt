@@ -17,8 +17,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
+import com.google.android.youtube.player.*
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import ru.a.o.mikhailov.telescope.databinding.FragmentControlBinding
+
 
 
 class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
@@ -28,6 +33,7 @@ class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
     private lateinit var bluetoothConnection: BluetoothConnection
     private  var bluetoothDevice: BluetoothDevice? = null
     private var handler : Handler? = null
+    private lateinit var youtubePlayerView: YouTubePlayerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +45,8 @@ class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
 
     override fun onStart() {
         super.onStart()
+        youtubePlayerView = binding.youTubePlayerView
+        lifecycle.addObserver(youtubePlayerView)
         dataModel.message.observe(this) {
             Log.d("mylog", "name ${it.name}")
             bluetoothDevice = it
@@ -69,6 +77,7 @@ class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
             }
     }
     private fun init(){
+
         val btManager = requireActivity().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         val btAdapter = btManager.adapter
         bluetoothConnection = BluetoothConnection(btAdapter, requireContext(), this)
@@ -91,4 +100,6 @@ class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
             }
         }
     }
+
+
 }
