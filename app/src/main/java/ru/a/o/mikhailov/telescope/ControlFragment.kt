@@ -2,28 +2,22 @@ package ru.a.o.mikhailov.telescope
 
 
 import a.o.mikahilov.myapplication.RepeatListener
-import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.core.content.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.youtube.player.*
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import ru.a.o.mikhailov.telescope.databinding.FragmentControlBinding
-
 
 
 class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
@@ -62,20 +56,33 @@ class ControlFragment : Fragment(), BluetoothConnectThread.Listener {
                 buttonSendTwo.visibility = View.GONE
                 buttonSendThree.visibility = View.GONE
                 buttonSendFour.visibility = View.GONE
-                buttonSendOne.setOnTouchListener(RepeatListener(100, 1500, View.OnClickListener {
-                    bluetoothConnection.sendMessage("1")
-                }))
-                buttonSendTwo.setOnTouchListener(RepeatListener(100, 1500, View.OnClickListener {
+                buttonSendOne.setOnTouchListener(RepeatListener(100, 500, View.OnClickListener {
                     bluetoothConnection.sendMessage("2")
                 }))
-                buttonSendThree.setOnTouchListener(RepeatListener(100, 1500, View.OnClickListener {
-                    bluetoothConnection.sendMessage("3")
-                }))
-                buttonSendFour.setOnTouchListener(RepeatListener(100, 1500, View.OnClickListener {
+                buttonSendTwo.setOnTouchListener(RepeatListener(100, 500, View.OnClickListener {
                     bluetoothConnection.sendMessage("4")
+                }))
+                buttonSendThree.setOnTouchListener(RepeatListener(100, 500, View.OnClickListener {
+                    bluetoothConnection.sendMessage("1")
+                }))
+                buttonSendFour.setOnTouchListener(RepeatListener(100, 500, View.OnClickListener {
+                    bluetoothConnection.sendMessage("2")
                 }))
             }
     }
+
+ /*   override fun onConfigurationChanged(newConfig: Configuration) {
+        childFragmentManager.beginTransaction().detach(this).commitAllowingStateLoss()
+        super.onConfigurationChanged(newConfig)
+        childFragmentManager.beginTransaction().attach(this).commitAllowingStateLoss()
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+
+            youtubePlayerView.enterFullScreen()
+        }
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            youtubePlayerView.exitFullScreen()
+        }
+    }*/
     private fun init(){
 
         val btManager = requireActivity().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
